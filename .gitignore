@@ -1,0 +1,22 @@
+# Build output
+/bin/
+*.exe
+*.test
+
+# Test & coverage output
+*.out
+coverage.*
+allure-results/
+allure-report/
+
+# Secrets — never commit real credentials
+.env
+.env.*
+!.env.example
+
+# Editors & OS
+.idea/
+.DS_Store
+
+# Claude Code: personal local settings (shared .claude/ files are committed)
+.claude/settings.local.json
