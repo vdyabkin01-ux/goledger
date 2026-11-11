@@ -1,4 +1,4 @@
-.PHONY: run test fmt vet check db-up db-down
+.PHONY: run test test-integration fmt vet check db-up db-down
 
 # Load local settings from .env (if it exists) and pass them to commands.
 -include .env
@@ -19,6 +19,10 @@ db-down:
 ## test: run all unit tests with the race detector
 test:
 	go test -race -count=1 ./...
+
+## test-integration: run integration tests against PostgreSQL in Docker (needs Docker running)
+test-integration:
+	go test -race -count=1 -tags=integration -v ./internal/storage/...
 
 ## fmt: format all Go files
 fmt:
