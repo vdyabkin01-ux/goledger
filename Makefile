@@ -1,8 +1,20 @@
-.PHONY: run test fmt vet check
+.PHONY: run test fmt vet check db-up db-down
 
-## run: start the API server locally (PORT defaults to 8080)
+# Load local settings from .env (if it exists) and pass them to commands.
+-include .env
+export
+
+## run: start the API server locally (needs .env and a running database)
 run:
 	go run ./cmd/server
+
+## db-up: start local PostgreSQL in Docker and wait until it is ready
+db-up:
+	docker compose up -d --wait db
+
+## db-down: stop local PostgreSQL (data is kept in a Docker volume)
+db-down:
+	docker compose down
 
 ## test: run all unit tests with the race detector
 test:
