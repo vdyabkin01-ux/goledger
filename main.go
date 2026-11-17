@@ -7,7 +7,9 @@ import (
 )
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "ok")
+	if _, err := fmt.Fprintln(w, "ok"); err != nil {
+		log.Printf("write health response: %v", err)
+	}
 }
 
 func main() {
